@@ -1,0 +1,7 @@
+---
+- name: Using Handlers based on tasks execution
+  hosts: wevservers
+  become: true
+  gather_facts: yes
+  roles:
+    - apache

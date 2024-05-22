@@ -1,0 +1,23 @@
+#creating an empty files
+---
+- name: Working on Files operations
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create the file
+      file:
+        path: /home/ansible/data.txt
+        state: touch
+    - name: Add some data to the file
+      blockinfile:
+        path: /home/ansible/data.txt
+        block: |
+          Welcome to all
+          this is sample data
+          from ansible playbook
+    - name: Display the file content
+      shell: cat /home/ansible/data.txt
+      register: file_content
+    - name: Print the file content
+      debug:
+        var: file_content.stdout

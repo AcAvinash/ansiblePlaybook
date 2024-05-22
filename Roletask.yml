@@ -1,0 +1,15 @@
+- name: Install httpd
+  yum:
+    name: "{{ package_name }}"
+    state: present
+  tags:
+    - Install
+  notify: Start Apache
+
+- name: Copy index.html
+  copy:
+    src: index.html
+    dest: /var/www/html/
+  tags:
+    - Copy
+  notify: Restart httpd

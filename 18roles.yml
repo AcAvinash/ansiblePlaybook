@@ -1,0 +1,36 @@
+---
+- name: Using Handlers based on tasks execution
+  hosts: wevservers
+  become: true
+  gather_facts: yes
+  vars:
+    package_name: httpd
+  tasks:
+  
+    - name: Install httpd
+      yum:
+        name: "{{ package_name }}"
+        state: present
+        tags:
+          - Install
+        notify: Start Apache
+
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/
+      tags:
+        - Copy
+      notify: Restart httpd
+
+
+  handlers:
+    - name: Start Apache
+      service:
+        name: "{{ package_name }}"
+        state: started
+        enabled: yes
+    - name: Restart httpd
+      service:
+        name: "{{ package_name }}"
+        state: restarted

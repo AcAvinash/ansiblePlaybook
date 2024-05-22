@@ -1,0 +1,16 @@
+---
+- name: Copy file using Template Module
+  hosts: webservers
+  become: true
+  vars:
+    user_name: Abcd
+    version_name: 3.2GA
+    auth_name: Avinash
+  tasks:
+    - name: Copy Template with Data
+      template:
+        src: /home/ansible/httpd_test.conf.j2
+        dest: /etc/httpd/conf/httpd_test.conf
+        owner: root
+        group: root
+        mode: 0745

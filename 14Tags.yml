@@ -1,0 +1,30 @@
+---
+- name: Working with tags
+  hosts: all
+  become: true
+  tasks:
+    - name: Task-1 for tags
+      command: echo "INSTALL PROCESS"
+      tags:
+        - install
+        - common
+
+    - name: Task-2 for tags
+      command: echo "COPY PROCESS"
+      tags:
+        - copy
+        - common
+        - execute
+
+    - name: Task-3 for tags
+      command: echo "INSTALL PROCESS"
+      tags:
+        - install
+        - common
+
+    - name: Task-4 for tags
+      command: echo "SERVICE START PROCESS"
+      tags:
+        - service
+        - execute
+        - common

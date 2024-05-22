@@ -1,0 +1,18 @@
+#this is for files permission chmod and chwon
+---
+- name: Create a file with permission and awner/group
+  hosts: webservers
+  gather_facts: false
+  tasks:
+    - name: Create a file with permissions
+      file:
+        path: ~/data.txt
+        mode: "0741"
+        state: touch
+    - name: Modify user/group details
+      become: true
+      become_user: ansible
+      file:
+        path: ~/data.txt
+        owner: ansible
+        group: ansible

@@ -1,0 +1,17 @@
+---
+- name: Install Httpd,Copy file and start service
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install Httpd
+      yum:
+        name: httpd
+        state: present
+    - name: Copy existed file to Node
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: Start Httpd Server
+      service:
+        name: httpd
+        state: started

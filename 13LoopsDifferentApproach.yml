@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install softwares
+      yum:
+        name: ["wget", "tree", "git", "zip", "unzip", "vim"]
+        state: present

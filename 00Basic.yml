@@ -1,0 +1,12 @@
+---
+#comment line Basic Structure for playbook
+- name: This is my sample playbook
+  hosts: all
+  become: true ##add sudo for commands
+  gather_facts: false
+  tasks:
+    - name: This is my sample playbook
+
+    - name: This is my sample playbook
+    
+    - name: This is my sample playbook

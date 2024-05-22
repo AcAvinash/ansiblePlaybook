@@ -1,0 +1,19 @@
+# this is first way Local Variables within the yaml
+---
+- hosts: all
+  become: true
+  vars:
+    package_name: httpd
+  tasks:
+    - name: install httpd
+      package:
+        name: "{{package_name}}"
+        state: present
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: Start Http Server
+      service:
+        name: "{{package_name}}"
+        state: started

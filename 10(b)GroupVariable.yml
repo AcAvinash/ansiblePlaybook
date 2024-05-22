@@ -1,0 +1,9 @@
+# this is first way Global Variables within the yaml
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install httpd
+      yum:
+        name: "{{my_pkg_name}}"
+        state: present

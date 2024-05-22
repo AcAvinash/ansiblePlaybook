@@ -1,0 +1,17 @@
+---
+- name: Working with folders
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create a directory or folder
+      file:
+        path: /home/ansible/raghu
+        state: directory
+
+    - name: Rename a folder
+      command: mv ~/raghu ~/my_new_data
+
+    - name: Delete a folder
+      file:
+        path: /home/ansible/my_new_data
+        state: absent

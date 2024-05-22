@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: true
+  vars:
+    mypkgs:
+      - wget
+      - git
+      - tree
+      - unzip
+      - httpd
+      - vim
+  tasks:
+    - name: install packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ mypkgs }}"
+# this is to check and get back the result to control node
+    - name: Verify package installation
+      command: "{{item}} --version"
+      loop: "{{ mypkgs }}"
+      register: command_output
+
+    - name: Display packages version
+      debug:
+        var: item.stdout
+      loop: "{{ command_output.results }}"
+

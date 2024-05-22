@@ -1,0 +1,37 @@
+## Working with HANDLERS
+---
+- name: Using HANDLERS based on tasks execution
+  hosts: webservers
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+      tags:
+        - Install
+        - common
+      notify:
+        - Start Server
+
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/index.html
+      tags:
+        - copy
+        - common
+      notify:
+        - Restart server
+
+  handlers:
+    - name: Start Server
+      service:
+        name: httpd
+        state: started
+
+    - name: Restart server
+      service:
+        name: httpd
+        state: restarted

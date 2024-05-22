@@ -1,0 +1,10 @@
+#this is for ping Managed Nodes
+---
+- name: Ping all hosts
+  hosts: all
+  gather_facts: no
+  remote_user: ansible
+  tasks:
+    - name: Perform Ping
+      ping:
+      remote_user: ansible
